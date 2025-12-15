@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    unordered_map<int, long long> bank;   // accNo -> balance
+    int choice;
+
+    while (true) {
+        cout << "\n--- BANK ACCOUNT SYSTEM ---\n";
+        cout << "1. Deposit\n";
+        cout << "2. Withdraw\n";
+        cout << "3. Check Balance\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            int acc;
+            long long amt;
+            cout << "Account Number: ";
+            cin >> acc;
+            cout << "Deposit Amount: ";
+            cin >> amt;
+
+            if (amt <= 0) {
+                cout << "Invalid amount!\n";
+                continue;
+            }
+
+            bank[acc] += amt;   // O(1)
+            cout << "Amount Deposited Successfully\n";
+        }
+
+        else if (choice == 2) {
+            int acc;
+            long long amt;
+            cout << "Account Number: ";
+            cin >> acc;
+
+            if (!bank.count(acc)) {
+                cout << "Account not found!\n";
+                continue;
+            }
+
+            cout << "Withdraw Amount: ";
+            cin >> amt;
+
+            if (amt > bank[acc]) {
+                cout << "Insufficient Balance!\n";
+                continue;
+            }
+
+            bank[acc] -= amt;   // O(1)
+            cout << "Withdrawal Successful\n";
+        }
+
+        else if (choice == 3) {
+            int acc;
+            cout << "Account Number: ";
+            cin >> acc;
+
+            if (!bank.count(acc)) {
+                cout << "Account not found!\n";
+            } else {
+                cout << "Current Balance: ₹" << bank[acc] << endl;
+            }
+        }
+
+        else if (choice == 4) {
+            cout << "Thank You! Exiting...\n";
+            break;
+        }
+
+        else {
+            cout << "Invalid Choice!\n";
+        }
+    }
+
+    return 0;
+}
